@@ -25,8 +25,8 @@ class options {
     return this.options.username;
   }
 }
-// option = new options(process.env.DJ_USERNAME);
-option = new options("sss@DDD");
+option = new options(process.env.DJ_USERNAME);
+// option = new options("sss@DDD");
 $.message = "";
 //直接答题 默认是一次得5分/天
 async function exam(option) {
