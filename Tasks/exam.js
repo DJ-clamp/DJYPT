@@ -32,10 +32,16 @@ $.message = "";
 async function exam(option) {
   let usernameArray = [];
   usernameArray.push(...option.getUsername().map((v) => option.url.exam(v)));
-  for (let key in usernameArray) {
-    await postExam(usernameArray[key]);
-    $.message = `完成${key + 1}个账号学习\n`;
-  }
+  return new Promise(async (resolve, reject) => {
+    for (let key in usernameArray) {
+      try {
+        await postExam(usernameArray[key]);
+        $.message = `完成${key + 1}个账号学习\n`;
+      } catch (err) {
+        throw console.log(e);
+      }
+    }
+  });
 }
 
 async function postExam(url) {
