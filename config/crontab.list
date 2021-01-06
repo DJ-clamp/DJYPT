@@ -1,0 +1,1 @@
+0 0 * * * cd ${JD_DIR}/Tasks && node exam.js >> ${JD_DIR}/log/exam.log 2>&1
