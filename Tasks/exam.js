@@ -47,7 +47,7 @@ async function postExam(url) {
         headers: {
           accept: "application/json, text/plain, */*",
         },
-        referrer: "http://www.ygjy.com.cn:8010/",
+        // referrer: "http://www.ygjy.com.cn:8010/",
       });
       resolve(true);
     } catch (e) {
