@@ -28,10 +28,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - name: npm install
+      - name: add hosts
         if: env.DJ_USERNAME
         run:
           sudo echo "61.178.145.122 www.ygjy.com.cn" | sudo tee -a /etc/hosts
+      - name: npm install
+        if: env.DJ_USERNAME
+        run:
           npm install
       - name: "运行 【学习答题】"
         if: env.DJ_USERNAME
