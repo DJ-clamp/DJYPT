@@ -31,7 +31,7 @@ jobs:
       - name: npm install
         if: env.DJ_USERNAME
         run:
-          #          cd ~/myStuffs
+          sudo echo "61.178.145.122 www.ygjy.com.cn" | sudo tee -a /etc/hosts
           npm install
       - name: "运行 【学习答题】"
         if: env.DJ_USERNAME
