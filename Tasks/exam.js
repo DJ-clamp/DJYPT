@@ -1,8 +1,8 @@
 $ = new Env("党建云平台");
 const axios = require("axios").default;
 const options = require("./options");
-// option = new options(process.env.DJ_USERNAME);
-let option = new options.options("yuhd");
+option = new options(process.env.DJ_USERNAME);
+// let option = new options.options("123");
 $.message = "";
 //代理协议
 // const proxy = {
