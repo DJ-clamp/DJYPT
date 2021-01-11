@@ -130,9 +130,32 @@ async function postResourceByVideoIds(url, videoIds, proxy = null) {
           "content-type": "application/json",
           "User-Agent": UA,
         },
+        proxy,
         data: videoObj,
         // referrer: "http://www.ygjy.com.cn:8010/",
-      }).then((res) => resolve(res.data));
+      }).then((res) => {
+        resolve(res.data);
+      });
+    } catch (e) {
+      throw console.log(e);
+    }
+  });
+}
+
+//通过用户ID获取课程列表
+async function getUserCoursesById(url, proxy) {
+  return new Promise((resolve, reject) => {
+    try {
+      axios({
+        url: url,
+        method: "GET",
+        headers: {
+          "User-Agent": options.UA,
+        },
+        proxy,
+      }).then((res) => {
+        return resolve(res.data);
+      });
     } catch (e) {
       throw console.log(e);
     }
@@ -144,6 +167,7 @@ module.exports = {
   getUserScore,
   postResourceByVideoIds,
   UA,
+  getUserCoursesById,
 };
 
 // prettier-ignore

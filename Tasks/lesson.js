@@ -1,11 +1,18 @@
 $ = new Env("党建学习");
-const axios = require("axios").default;
+// const axios = require("axios").default;
 const options = require("./options.js");
+const videoRequest = require("./video.js");
+let user = process.env.DJ_USERNAME || "";
 
-// http://www.ygjy.com.cn:8011/api/pub/wx/study/studyRecord?userId=yuhd&courseWareId=ff808081749657d20175fef9214e6d9c
-let option = new options.options(process.env.DJ_USERNAME);
+let option = new options.options(user);
 //代理协议
-const proxy = null;
+// const proxy = null;
+const proxy = {
+  protocol: "https",
+  host: "192.168.31.8",
+  port: 7890,
+};
+
 // 获取用户的课程列表
 function getUserCourses() {
   return new Promise(async (resolve, reject) => {
@@ -14,20 +21,23 @@ function getUserCourses() {
       let userCourses = [];
       for (let user in usernameArray) {
         //获取每个学员的课程
-        let course = await getUserCoursesById(
+        let courses = await options.getUserCoursesById(
           usernameArray[user].courseWare,
           proxy
         );
-        let videoIds = course.map((i) => i.videoId);
+        let videoIds = courses.map((i) => i.videoId);
         let videos = await options.postResourceByVideoIds(
           usernameArray[user].annex,
-          videoIds
+          videoIds,
+          proxy
         );
-        Object.keys(videos).map((element) => {
-          console.log(videos[element].realName);
-          console.log(videos[element]);
+        // 数据重组为统一结构 方便调用
+        let data = mergeCoursesAndFilesInfo(courses, videos);
+        data.map((element) => {
+          console.log(element.author, " - ", element.title);
+          console.log(element.realName);
         });
-        userCourses.push({ course, username: usernameArray[user].username });
+        userCourses.push({ data, username: usernameArray[user].username });
       }
       resolve(userCourses);
     } catch (e) {
@@ -36,24 +46,13 @@ function getUserCourses() {
   });
 }
 
-//通过用户ID获取课程列表
-async function getUserCoursesById(url, proxy) {
-  return new Promise((resolve, reject) => {
-    try {
-      axios({
-        url: url,
-        method: "GET",
-        headers: {
-          "User-Agent": options.UA,
-        },
-        proxy,
-      }).then((res) => {
-        return resolve(res.data);
-      });
-    } catch (e) {
-      throw console.log(e);
-    }
+function mergeCoursesAndFilesInfo(courses, files) {
+  courses.forEach((element, i) => {
+    let video = files[element.videoId];
+    courses[i] = Object.assign(video, courses[i]);
+    videoRequest.getVideoInfo(courses[i]);
   });
+  return courses;
 }
 
 (async () => {
