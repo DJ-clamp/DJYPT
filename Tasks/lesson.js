@@ -3,7 +3,7 @@ const axios = require("axios").default;
 const options = require("./options.js");
 
 // http://www.ygjy.com.cn:8011/api/pub/wx/study/studyRecord?userId=yuhd&courseWareId=ff808081749657d20175fef9214e6d9c
-option = new options(process.env.DJ_USERNAME);
+let option = new options(process.env.DJ_USERNAME);
 //代理协议
 const proxy = null;
 // 获取用户的课程列表
