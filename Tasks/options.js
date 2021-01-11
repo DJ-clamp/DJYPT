@@ -36,6 +36,7 @@ class options {
     } else {
       this.options.username.push(usernames);
     }
+    $.log(`目前提供了${this.options.username.length}个账号`);
   }
 
   getUsername() {

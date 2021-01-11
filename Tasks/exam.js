@@ -1,16 +1,15 @@
 $ = new Env("党建云平台");
 const axios = require("axios").default;
 const options = require("./options.js");
-console.log(process.env.DJ_USERNAME);
-let option = new options(process.env.DJ_USERNAME);
+let user = process.env.DJ_USERNAME || undefined;
 $.message = "";
 //代理协议
+const proxy = null;
 // const proxy = {
 //   protocol: "https",
 //   host: "192.168.31.8",
 //   port: 7890,
 // };
-const proxy = null;
 //直接答题 默认是一次得5分/天
 async function exam(option) {
   let usernameArray = option.getUserDetail();
@@ -27,12 +26,12 @@ async function exam(option) {
           proxy
         );
         if (score.praDay == 0) {
-          // $.log(`${name}开始答题`);
           console.log(usernameArray[key].exam);
           await postExam(usernameArray[key].exam);
         } else {
           $.log(`已经答题过了`);
         }
+        score = await options.getUserScore(usernameArray[key].userScore, proxy);
         $.message += `[${name}] 完成答题: ${score.praDay} 积分\n`;
       } catch (err) {
         throw console.log(err);
@@ -62,6 +61,7 @@ async function postExam(url) {
 }
 
 (async () => {
+  let option = new options.options(user);
   await exam(option);
   $.msg($.message);
 })();
