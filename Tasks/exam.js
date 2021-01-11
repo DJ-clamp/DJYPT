@@ -5,12 +5,12 @@ const options = require("./options");
 let option = new options.options("yuhd");
 $.message = "";
 //代理协议
-const proxy = {
-  protocol: "https",
-  host: "192.168.31.8",
-  port: 7890,
-};
-// const proxy = null;
+// const proxy = {
+//   protocol: "https",
+//   host: "192.168.31.8",
+//   port: 7890,
+// };
+const proxy = null;
 //直接答题 默认是一次得5分/天
 async function exam(option) {
   let usernameArray = option.getUserDetail();
