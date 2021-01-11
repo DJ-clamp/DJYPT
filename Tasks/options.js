@@ -127,7 +127,7 @@ async function postResourceByVideoIds(url, videoIds, proxy = null) {
         headers: {
           accept: "application/json, text/plain, */*",
           "content-type": "application/json",
-          "User-Agent": options.UA,
+          "User-Agent": UA,
         },
         data: videoObj,
         // referrer: "http://www.ygjy.com.cn:8010/",

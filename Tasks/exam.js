@@ -1,8 +1,8 @@
 $ = new Env("党建云平台");
 const axios = require("axios").default;
-const options = require("./options");
+const options = require("./options.js");
+console.log(process.env.DJ_USERNAME);
 let option = new options(process.env.DJ_USERNAME);
-// let option = new options.options("123");
 $.message = "";
 //代理协议
 // const proxy = {
@@ -27,7 +27,8 @@ async function exam(option) {
           proxy
         );
         if (score.praDay == 0) {
-          $.log(`${name}开始答题`);
+          // $.log(`${name}开始答题`);
+          console.log(usernameArray[key].exam);
           await postExam(usernameArray[key].exam);
         } else {
           $.log(`已经答题过了`);
@@ -51,9 +52,9 @@ async function postExam(url) {
           accept: "application/json, text/plain, */*",
           "User-Agent": options.UA,
         },
-        // referrer: "http://www.ygjy.com.cn:8010/",
+        referrer: "http://www.ygjy.com.cn:8010/",
       });
-      resolve(true);
+      resolve();
     } catch (e) {
       throw console.log(e);
     }
