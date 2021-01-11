@@ -6,12 +6,12 @@ let user = process.env.DJ_USERNAME || "";
 
 let option = new options.options(user);
 //代理协议
-// const proxy = null;
-const proxy = {
-  protocol: "https",
-  host: "192.168.31.8",
-  port: 7890,
-};
+const proxy = null;
+// const proxy = {
+//   protocol: "https",
+//   host: "192.168.31.8",
+//   port: 7890,
+// };
 
 // 获取用户的课程列表
 function getUserCourses() {
