@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "eslint": "^7.17.0",
     "get-audio-duration": "^2.0.2",
     "get-video-duration": "^3.0.2"
   }
