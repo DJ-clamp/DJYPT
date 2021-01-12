@@ -26,7 +26,6 @@ async function exam(option) {
           proxy
         );
         if (score.praDay == 0) {
-          console.log(usernameArray[key].exam);
           await postExam(usernameArray[key].exam);
         } else {
           $.log(`已经答题过了`);
