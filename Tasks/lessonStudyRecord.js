@@ -61,6 +61,7 @@ async function DummyAddUserScores(proxy) {
         usernameArray[key].userDetail,
         proxy
       );
+      $.log(`第${parseInt(key) + 1}个账号开始听课`);
       let score = await options.getUserScore(
         usernameArray[key].userScore,
         proxy
