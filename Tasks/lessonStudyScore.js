@@ -28,7 +28,7 @@ async function studyScore() {
         );
         if (score.culDay >= 10) {
           $.log(`第${parseInt(key) + 1}个账号积分已满`);
-          break;
+          continue;
         }
         $.log("开始结算分数 +1");
         let url = usernameArray[key].studyScore(
@@ -38,6 +38,8 @@ async function studyScore() {
         );
         await options.addStudyScore(url, proxy);
         $.log("完成结算分数 +1");
+        score = await options.getUserScore(usernameArray[key].userScore, proxy);
+        $.message += `[${name}] 完成课程进度: ${score.culDay} 积分\n`;
       }
       resolve();
     } catch (err) {
@@ -50,7 +52,7 @@ async function studyScore() {
   // 1. 获取用户课程
   $.log("开始结算");
   await studyScore(proxy);
-  $.msg("完成结算");
+  $.msg($.message);
   // 2. 通过课程中的videoId获取视频或音频资源
   // 更新课程进度
   // console.log(courses);
