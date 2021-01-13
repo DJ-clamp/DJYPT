@@ -11,7 +11,7 @@ const proxy = null;
 //   host: "192.168.31.8",
 //   port: 7890,
 // };
-
+$.message = "";
 async function studyScore() {
   return new Promise(async (resolve, reject) => {
     try {

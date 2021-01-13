@@ -12,7 +12,7 @@ const proxy = null;
 //   host: "192.168.31.8",
 //   port: 7890,
 // };
-
+$.message = "";
 // 获取用户的课程列表
 function getUserCourses() {
   return new Promise(async (resolve, reject) => {

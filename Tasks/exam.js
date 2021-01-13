@@ -20,7 +20,7 @@ async function exam(option) {
           usernameArray[key].userDetail,
           proxy
         );
-        $.log(`${name}开始答题`);
+        $.log(`第${parseInt(key) + 1}个账号开始答题`);
         let score = await options.getUserScore(
           usernameArray[key].userScore,
           proxy
@@ -31,7 +31,9 @@ async function exam(option) {
           $.log(`已经答题过了`);
         }
         score = await options.getUserScore(usernameArray[key].userScore, proxy);
-        $.message += `[${name}] 完成答题: ${score.praDay} 积分\n`;
+        $.message += `[第${parseInt(key) + 1}个账号] 完成答题: ${
+          score.praDay
+        } 积分\n`;
       } catch (err) {
         throw console.log(err);
       }
