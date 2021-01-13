@@ -38,7 +38,7 @@ jobs:
         if: env.DJ_USERNAME
         run:
           #           cd ~/myStuffs
-          node Tasks/lessonStudyRecord.js
+          node Tasks/exam.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
