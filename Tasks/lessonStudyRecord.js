@@ -115,7 +115,9 @@ async function DummyAddUserScores(proxy) {
         await options.addStudyScore(url, proxy);
         $.log("完成当日首次结算分数 +1");
         score = await options.getUserScore(usernameArray[key].userScore, proxy);
-        $.message += `[${name}] 完成课程进度: ${score.culDay} 积分\n`;
+        $.message += `[第${parseInt(key) + 1}个账号] 完成课程进度: ${
+          score.culDay
+        } 积分\n`;
       }
     }
     resolve();
