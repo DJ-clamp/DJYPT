@@ -30,7 +30,7 @@ jobs:
           node-version: 14.x
       - name: add hosts
         if: env.DJ_USERNAME
-        run: sudo echo "61.178.145.122 www.ygjy.com.cn" | sudo tee -a /etc/hosts
+        run: sudo echo "${{DJ_IP}} ${{DJ_URL}}" | sudo tee -a /etc/hosts
       - name: npm install
         if: env.DJ_USERNAME
         run: npm install
