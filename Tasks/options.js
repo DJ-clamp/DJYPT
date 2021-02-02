@@ -1,6 +1,7 @@
 const axios = require("axios").default;
 const UA =
   "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1";
+let BASE_URL = process.env.DJ_URL || undefined;
 class options {
   // eslint-disable-next-line
   options = {
@@ -9,41 +10,41 @@ class options {
   url = {
     // 答题 [POST]
     exam: (username) =>
-      `http://www.ygjy.com.cn:8011/api/pub/wx/practice/subScore?userId=${username}&score=5`,
+      `http://${BASE_URL}:8011/api/pub/wx/practice/subScore?userId=${username}&score=5`,
     // 获取用户的详细信息 [GET] [ type:json , name为用户姓名  ]
     userDetail: (username) =>
-      `http://www.ygjy.com.cn:8011/api/pub/wx/api/userDetail?userId=${username}`,
+      `http://${BASE_URL}:8011/api/pub/wx/api/userDetail?userId=${username}`,
     // 分数 {"praMonth":10,"culDay":0,"praTotal":10,"praWeek":10,"culWeek":0,"culTotal":0,"culMonth":0,"praDay":5} praDay 为每日积分
     userScore: (username) =>
-      `http://www.ygjy.com.cn:8011/api/pub/wx/center/userScore?userId=${username}`,
+      `http://${BASE_URL}:8011/api/pub/wx/center/userScore?userId=${username}`,
     /*
      * @method GET
      * @param username {String} 通过username id信息获取课程列表
      */
     courseWare: (username) =>
-      `http://www.ygjy.com.cn:8011/api/pub/wx/study/courseWare?userId=${username}`,
+      `http://${BASE_URL}:8011/api/pub/wx/study/courseWare?userId=${username}`,
     /*
      * @method POST
      */
-    annex: () => `http://www.ygjy.com.cn:8011/api/pub/wx/study/annex`,
+    annex: () => `http://${BASE_URL}:8011/api/pub/wx/study/annex`,
     /*
      * 加入学习课程
      * @method GET
      */
     studyRecord: (username, courseWareId) =>
-      `http://www.ygjy.com.cn:8011/api/pub/wx/study/studyRecord?userId=${username}&courseWareId=${courseWareId}`,
+      `http://${BASE_URL}:8011/api/pub/wx/study/studyRecord?userId=${username}&courseWareId=${courseWareId}`,
     /*
      * 更新课程进度
      * @method POST
      */
     updateStudyRecord: (username, courseWareId, duration, schedule) =>
-      `http://www.ygjy.com.cn:8011/api/pub/wx/study/updateStudyRecord?userId=${username}&courseWareId=${courseWareId}&duration=${duration}&schedule=${schedule}&isDone=false`,
+      `http://${BASE_URL}:8011/api/pub/wx/study/updateStudyRecord?userId=${username}&courseWareId=${courseWareId}&duration=${duration}&schedule=${schedule}&isDone=false`,
     /*
      * 结算分数
      * @method POST
      */
     studyScore: (username, courseWareId, duration, schedule) =>
-      `http://www.ygjy.com.cn:8011/api/pub/wx/study/studyScore?userId=${username}&courseWareId=${courseWareId}&duration=${duration}&schedule=${schedule}&isDone=false`,
+      `http://${BASE_URL}:8011/api/pub/wx/study/studyScore?userId=${username}&courseWareId=${courseWareId}&duration=${duration}&schedule=${schedule}&isDone=false`,
   };
   constructor(usernames) {
     if (usernames == undefined || usernames == "") {
@@ -156,7 +157,7 @@ async function postResourceByVideoIds(url, videoIds, proxy = null) {
         },
         proxy,
         data: videoObj,
-        // referrer: "http://www.ygjy.com.cn:8010/",
+        // referrer: "http://${BASE_URL}:8010/",
       }).then((res) => {
         resolve(res.data);
       });
@@ -216,7 +217,7 @@ async function updateCourseSchedule(url, proxy = null) {
           "User-Agent": UA,
         },
         proxy,
-        referrer: "http://www.ygjy.com.cn:8010/",
+        referrer: `http://${BASE_URL}:8010/`,
       });
       resolve();
     } catch (e) {
@@ -236,7 +237,7 @@ async function addStudyScore(url, proxy = null) {
           "User-Agent": UA,
         },
         proxy,
-        referrer: "http://www.ygjy.com.cn:8010/",
+        referrer: `http://${BASE_URL}:8010/`,
       });
       resolve();
     } catch (e) {
@@ -250,6 +251,7 @@ async function sleep(ms) {
 }
 module.exports = {
   UA,
+  BASE_URL,
   sleep,
   options,
   getUserDetail,

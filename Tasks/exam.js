@@ -53,7 +53,7 @@ async function postExam(url, proxy = null) {
           "User-Agent": options.UA,
         },
         proxy,
-        referrer: "http://www.ygjy.com.cn:8010/",
+        referrer: `http://${options.BASE_URL}:8010/`,
       });
       resolve();
     } catch (e) {

@@ -17,8 +17,8 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     env:
       DJ_USERNAME: ${{ secrets.DJ_USERNAME }}
-      # BBSUSERNAME: ${{ secrets.BBSUSERNAME }}
-      # BBSPASSWORD: ${{ secrets.BBSPASSWORD }}
+      DJ_IP: ${{ secrets.DJ_IP }}
+      DJ_URL: ${{ secrets.DJ_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -30,7 +30,7 @@ jobs:
           node-version: 14.x
       - name: add hosts
         if: env.DJ_USERNAME
-        run: sudo echo "61.178.145.122 www.ygjy.com.cn" | sudo tee -a /etc/hosts
+        run: sudo echo ${{ secrets.DJ_IP }} ${{ secrets.DJ_URL }} | sudo tee -a /etc/hosts
       - name: npm install
         if: env.DJ_USERNAME
         run: npm install
