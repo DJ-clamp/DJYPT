@@ -17,8 +17,8 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     env:
       DJ_USERNAME: ${{ secrets.DJ_USERNAME }}
-      # BBSUSERNAME: ${{ secrets.BBSUSERNAME }}
-      # BBSPASSWORD: ${{ secrets.BBSPASSWORD }}
+      DJ_IP: ${{ secrets.DJ_IP }}
+      DJ_URL: ${{ secrets.DJ_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
