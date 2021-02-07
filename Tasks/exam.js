@@ -1,5 +1,4 @@
 $ = new Env("党建云平台");
-const axios = require("axios").default;
 const options = require("./options.js");
 let user = process.env.DJ_USERNAME || undefined;
 $.message = "";
@@ -26,7 +25,7 @@ async function exam(option) {
           proxy
         );
         if (score.praDay == 0) {
-          await postExam(usernameArray[key].exam, proxy);
+          await options.postExam(usernameArray[key].exam, proxy);
         } else {
           $.log(`已经答题过了`);
         }
@@ -39,26 +38,6 @@ async function exam(option) {
       }
     }
     resolve();
-  });
-}
-
-async function postExam(url, proxy = null) {
-  return new Promise((resolve, reject) => {
-    try {
-      axios({
-        url: url,
-        method: "POST",
-        headers: {
-          accept: "application/json, text/plain, */*",
-          "User-Agent": options.UA,
-        },
-        proxy,
-        referrer: `http://${options.BASE_URL}:8010/`,
-      });
-      resolve();
-    } catch (e) {
-      throw console.log(e);
-    }
   });
 }
 

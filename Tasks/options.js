@@ -106,6 +106,26 @@ class options {
   }
 }
 
+async function postExam(url, proxy = null) {
+  return new Promise((resolve, reject) => {
+    try {
+      axios({
+        url: url,
+        method: "POST",
+        headers: {
+          accept: "application/json, text/plain, */*",
+          "User-Agent": UA,
+        },
+        proxy,
+        referrer: `http://${BASE_URL}:8010/`,
+      });
+      resolve();
+    } catch (e) {
+      throw console.log(e);
+    }
+  });
+}
+
 async function getUserDetail(url, proxy = null) {
   return new Promise((resolve, reject) => {
     try {
@@ -262,6 +282,7 @@ module.exports = {
   studyRecordById,
   updateCourseSchedule,
   addStudyScore,
+  postExam,
 };
 
 // prettier-ignore
